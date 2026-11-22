@@ -1,0 +1,5 @@
+{% extends 'base.html' %}{% block content %}<div class="auth">
+{% with headline='Join the service desk.', sub='Employees can register to report and track IT incidents.' %}{% include '_auth_side.html' %}{% endwith %}
+<section class="auth-form"><div class="auth-box"><h2>Create account</h2><p class="muted">Technician and admin accounts are created by an administrator.</p>
+<form method="post"><label for="name">Full name</label><input id="name" name="name" required minlength="2"><label for="email">Email</label><input id="email" name="email" type="email" required><label for="password">Password (min 6 characters)</label><input id="password" name="password" type="password" required minlength="6"><button>Create account</button></form>
+<p class="muted" style="margin-top:18px">Already registered? <a href="/login">Sign in</a></p></div></section></div>{% endblock %}

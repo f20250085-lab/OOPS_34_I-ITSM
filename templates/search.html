@@ -1,0 +1,12 @@
+{% extends 'base.html' %}{% block content %}<div class="pagehead"><div><h1>Incident search</h1></div></div>
+<form class="card filters" method="get">
+<input name="q" placeholder="Search INC-ID, title or description" value="{{filters.get('q','')}}">
+<select name="status"><option value="">All statuses</option>{% for x in STATUSES %}<option value="{{x}}" {% if filters.get('status')==x %}selected{% endif %}>{{x}}</option>{% endfor %}</select>
+<select name="priority"><option value="">All priorities</option>{% for x in ['P1','P2','P3','P4'] %}<option {% if filters.get('priority')==x %}selected{% endif %}>{{x}}</option>{% endfor %}</select>
+<select name="category"><option value="">All categories</option>{% for x in CATEGORIES %}<option {% if filters.get('category')==x %}selected{% endif %}>{{x}}</option>{% endfor %}</select>
+<select name="service"><option value="">All services</option>{% for x in SERVICES %}<option {% if filters.get('service')==x %}selected{% endif %}>{{x}}</option>{% endfor %}</select>
+<select name="sla"><option value="">Any SLA status</option>{% for x in ['ON TRACK','AT RISK','BREACHED','MET'] %}<option {% if filters.get('sla')==x %}selected{% endif %}>{{x}}</option>{% endfor %}</select>
+{% if me.role=='ADMIN' %}<select name="tech"><option value="">All technicians</option>{% for t in technicians %}<option value="{{t.id}}" {% if filters.get('tech')==t.id|string %}selected{% endif %}>{{t.name}}</option>{% endfor %}</select>{% endif %}
+<label class="inline">From <input type="date" name="date_from" value="{{filters.get('date_from','')}}"></label><label class="inline">To <input type="date" name="date_to" value="{{filters.get('date_to','')}}"></label>
+<button>Filter</button><a class="button secondary" href="/search">Reset</a></form>
+<section class="card"><p class="muted">{{incidents|length}} result(s)</p>{% include 'incident_table.html' %}</section>{% endblock %}

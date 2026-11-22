@@ -1,0 +1,7 @@
+{% extends 'base.html' %}{% block content %}<div class="pagehead"><div><h1>System settings</h1><p class="muted">Configure strategies and SLA policies without changing code.</p></div></div>
+<form method="post"><section class="card"><h2>Strategies</h2><div class="formgrid">
+<div><label>Default technician assignment</label><select name="assignment_strategy">{% for k,c in assignment_options.items() %}<option value="{{k}}" {% if k==assignment %}selected{% endif %}>{{c.label}}</option>{% endfor %}</select><small>Technicians with {{max_active}} active incidents are skipped (workload limit).</small></div>
+<div><label>Priority calculation</label><select name="priority_strategy">{% for k,c in priority_options.items() %}<option value="{{k}}" {% if k==priority %}selected{% endif %}>{{k|capitalize}} ({{c.__name__}})</option>{% endfor %}</select><small>Weighted: impact × urgency × criticality + users/25. Conservative: additive score.</small></div>
+</div></section>
+<section class="card"><h2>SLA policies (minutes)</h2><div class="tw"><table><tr><th>Priority</th><th>Response target</th><th>Resolution target</th></tr>{% for p in policies %}<tr><td><span class="pill {{p.priority|lower}}">{{p.priority}}</span></td><td><input type="number" min="1" name="{{p.priority}}_response" value="{{p.response_min}}"></td><td><input type="number" min="1" name="{{p.priority}}_resolution" value="{{p.resolution_min}}"></td></tr>{% endfor %}</table></div></section>
+<button><svg class="ic"><use href="#i-check"/></svg>Save settings</button></form>{% endblock %}

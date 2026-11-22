@@ -1,0 +1,1 @@
+{% extends 'base.html' %}{% block content %}<section class="card empty" style="padding:60px 20px"><div class="errbig">{{code}}</div><h1>{{ 'Not allowed' if code==403 else 'Not found' }}</h1><p class="muted" style="margin:10px 0 24px">{{message}}</p><a class="button" href="/dashboard">Back to dashboard</a></section>{% endblock %}

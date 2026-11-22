@@ -1,0 +1,11 @@
+{% extends 'base.html' %}{% block content %}<div class="pagehead"><div><h1>Report an incident</h1><p class="muted">Tell us what broke. We classify it, set the priority and route it to the right technician automatically.</p></div></div>
+<form class="card formgrid" method="post">
+<div class="full"><label>Short title</label><input name="title" required minlength="5" value="{{form.get('title','')}}" placeholder="e.g. Payment application unavailable"></div>
+<div class="full"><label>Description</label><textarea name="description" required minlength="10" rows="4" placeholder="What happened? Include error messages and steps to reproduce.">{{form.get('description','')}}</textarea></div>
+<div><label>Category</label><select name="category"><option value="">Auto-detect from description</option>{% for c in CATEGORIES %}<option {% if form.get('category')==c %}selected{% endif %}>{{c}}</option>{% endfor %}</select></div>
+<div><label>Affected service</label><select name="service">{% for s in SERVICES %}<option {% if form.get('service')==s %}selected{% endif %}>{{s}}</option>{% endfor %}</select></div>
+<div><label>Impact (1–5)</label><input type="number" name="impact" min="1" max="5" value="{{form.get('impact',3)}}"></div>
+<div><label>Urgency (1–5)</label><input type="number" name="urgency" min="1" max="5" value="{{form.get('urgency',3)}}"></div>
+<div><label>Business criticality (1–5)</label><input type="number" name="criticality" min="1" max="5" value="{{form.get('criticality',3)}}"></div>
+<div><label>Users affected</label><input type="number" name="affected_users" min="1" value="{{form.get('affected_users',1)}}"></div>
+<div class="full"><button><svg class="ic"><use href="#i-plus"/></svg>Create incident &amp; calculate priority</button></div></form>{% endblock %}

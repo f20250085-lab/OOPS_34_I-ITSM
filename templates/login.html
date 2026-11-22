@@ -1,0 +1,10 @@
+{% extends 'base.html' %}{% block content %}<div class="auth">
+{% with headline='IT issues, sorted.', sub='Report a problem, watch it get fixed, and rate the help you got.' %}{% include '_auth_side.html' %}{% endwith %}
+<section class="auth-form"><div class="auth-box"><h2>Sign in</h2><p class="muted">Report, resolve and monitor IT incidents.</p>
+<form method="post"><label for="email">Email</label><input id="email" name="email" type="email" required placeholder="bits…@itsm.demo" autocomplete="username"><label for="password">Password</label><input id="password" name="password" type="password" required autocomplete="current-password"><button>Sign in</button></form>
+<p class="muted" style="margin-top:18px">New here? <a href="/register">Create an employee account</a></p>
+<div class="demo"><b>Demo accounts</b><p>Tap one to fill the form.</p><div class="chips">
+<button type="button" class="chip r-a" data-e="bitsadmin@itsm.demo" data-p="BITSadmin123"><span>bitsadmin@itsm.demo<small> · BITSadmin123</small></span><i>Admin</i></button>
+<button type="button" class="chip r-e" data-e="bitsemployee@itsm.demo" data-p="BITSuser123"><span>bitsemployee@itsm.demo<small> · BITSuser123</small></span><i>Employee</i></button>
+<button type="button" class="chip r-t" data-e="bitsneha@itsm.demo" data-p="BITStech123"><span>bitsneha@itsm.demo<small> · BITStech123</small></span><i>Technician</i></button></div></div></div></section></div>
+<script>document.querySelectorAll('.chip').forEach(function(c){c.addEventListener('click',function(){document.getElementById('email').value=c.dataset.e;document.getElementById('password').value=c.dataset.p;document.querySelector('.auth-box form button').focus()})})</script>{% endblock %}
